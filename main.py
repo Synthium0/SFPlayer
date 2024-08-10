@@ -7,7 +7,7 @@ import subprocess
 class MyApp(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("My Application")
+        self.title("SFPlayer")
         self.geometry("800x600")
 
         self.main_frame = tk.Frame(self)
