@@ -13,7 +13,7 @@ Then, ensure you have all the modules required for this project by running
 ```
 pip install -r requirements.txt
 ```
-Next, go to the [Ruffle](https://ruffle.rs/) website and download the latest Windows Executeable, and place it in the SFPlayer-main folder
+Next, go to the [Ruffle](https://ruffle.rs/) website and download the latest Windows Executeable, and place it in the SFPlayer folder
 Then, run the program!
 ```
 python main.py
