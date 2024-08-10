@@ -5,6 +5,10 @@ To start, clone this repo by running
 ```
 git clone https://github.com/Synthium0/SFPlayer.git
 ```
+Then, cd into it
+```
+cd SFPlayer
+```
 Then, ensure you have all the modules required for this project by running
 ```
 pip install -r requirements.txt
