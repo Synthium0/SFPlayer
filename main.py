@@ -7,7 +7,7 @@ import subprocess
 class MyApp(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("SFPlayer")
+        self.title("My Application")
         self.geometry("800x600")
 
         self.main_frame = tk.Frame(self)
@@ -98,22 +98,24 @@ class MyApp(tk.Tk):
         back_button = tk.Button(self.icon_frame, text="Back", command=self.show_main_menu)
         back_button.grid(row=0, column=0, padx=10, pady=10, sticky="nw")
 
+        # Store the directory for later use
+        self.current_games_directory = os.path.join("Games", folder, "Games")
+        
         # Load game icons from the selected folder
-        games_directory = os.path.join("Games", folder, "Games")
-        print(f"Checking directory: {games_directory}")
+        print(f"Checking directory: {self.current_games_directory}")
 
-        if os.path.exists(games_directory) and os.path.isdir(games_directory):
+        if os.path.exists(self.current_games_directory) and os.path.isdir(self.current_games_directory):
             game_folders = ["Game1", "Game2", "Game3"]
 
             for game_folder in game_folders:
-                bmp_file = os.path.join(games_directory, game_folder, f"{game_folder}.bmp")
+                bmp_file = os.path.join(self.current_games_directory, game_folder, f"{game_folder}.bmp")
                 if os.path.exists(bmp_file):
                     game_name = f"Game {game_folder[-1]}"
                     self.create_icon(game_name, bmp_file)
                 else:
-                    print(f"Error: No {game_folder}.bmp found in '{games_directory}'")
+                    print(f"Error: No {game_folder}.bmp found in '{self.current_games_directory}'")
         else:
-            print(f"The directory '{games_directory}' does not exist or is incorrect.")
+            print(f"The directory '{self.current_games_directory}' does not exist or is incorrect.")
 
     def show_main_menu(self):
         # Clear current icons and restore main menu
@@ -129,9 +131,9 @@ class MyApp(tk.Tk):
         event.widget.config(bg=self.icon_frame.cget("background"))
 
     def run_game(self, game_name):
-        # Determine the directory based on the game name
+        # Determine the directory based on the stored path
         folder_name = f"Game{game_name[-1]}"
-        game_directory = os.path.join("Games", "Cars 2", "Games", folder_name)
+        game_directory = os.path.join(self.current_games_directory, folder_name)
 
         # Build path to SWF file
         swf_file = os.path.join(game_directory, f"{folder_name}.swf")
