@@ -125,7 +125,7 @@ class MyApp(tk.Tk):
         print(f"Checking directory: {self.current_games_directory}")
 
         if os.path.exists(self.current_games_directory) and os.path.isdir(self.current_games_directory):
-            game_folders = ["Game1", "Game2", "Game3"]
+            game_folders = [f for f in os.listdir(self.current_games_directory) if os.path.isdir(os.path.join(self.current_games_directory, f))]
 
             for game_folder in game_folders:
                 bmp_file = os.path.join(self.current_games_directory, game_folder, f"{game_folder}.bmp")
@@ -155,15 +155,17 @@ class MyApp(tk.Tk):
         folder_name = f"Game{game_name[-1]}"
         game_directory = os.path.join(self.current_games_directory, folder_name)
 
-        # Build path to SWF file
         swf_file = os.path.join(game_directory, f"{folder_name}.swf")
         if os.path.exists(swf_file):
-            ruffle_path = os.path.join(os.path.dirname(__file__), "ruffle.exe")
-            if os.path.exists(ruffle_path):
-                print(f"Running command: {ruffle_path} {swf_file}")
-                subprocess.Popen([ruffle_path, swf_file])
+            flash_directory = os.path.join(os.path.dirname(__file__), "Flash")
+            exe_files = [f for f in os.listdir(flash_directory) if f.endswith('.exe')]
+
+            if exe_files:
+                exe_file = os.path.join(flash_directory, exe_files[0])  # Use the first .exe found in the Flash folder
+                print(f"Running command: {exe_file} {swf_file}")
+                subprocess.Popen([exe_file, swf_file])
             else:
-                print("Error: ruffle.exe not found in the same directory as main.py")
+                print("Error: No executable found in the Flash folder")
         else:
             print(f"Error: SWF file {swf_file} not found")
 
