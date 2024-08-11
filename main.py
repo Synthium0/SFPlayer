@@ -1,4 +1,5 @@
 import os
+import zipfile
 import xml.etree.ElementTree as ET
 import tkinter as tk
 from PIL import Image, ImageTk
@@ -26,6 +27,12 @@ class MyApp(tk.Tk):
         games_directory = "Games"
 
         if os.path.exists(games_directory) and os.path.isdir(games_directory):
+            # Process ZIP files first
+            zip_files = [f for f in os.listdir(games_directory) if f.endswith('.zip')]
+            for zip_file in zip_files:
+                self.extract_zip_file(games_directory, zip_file)
+
+            # Now process directories
             folders = [name for name in os.listdir(games_directory)
                        if os.path.isdir(os.path.join(games_directory, name))]
 
@@ -43,6 +50,19 @@ class MyApp(tk.Tk):
                 print(f"No folders were found in the '{games_directory}' directory.")
         else:
             print(f"The directory '{games_directory}' does not exist.")
+
+    def extract_zip_file(self, directory, zip_file):
+        zip_path = os.path.join(directory, zip_file)
+        folder_name = zip_file[:-4]  # Remove .zip extension
+        extract_path = os.path.join(directory, folder_name)
+
+        if not os.path.exists(extract_path):
+            os.makedirs(extract_path)
+            print(f"Extracting '{zip_file}' to '{extract_path}'")
+            with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+                zip_ref.extractall(extract_path)
+        else:
+            print(f"'{folder_name}' already exists. Skipping extraction.")
 
     def extract_game_name(self, xml_file):
         try:
