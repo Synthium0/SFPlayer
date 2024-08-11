@@ -21,6 +21,6 @@ python main.py
 ## Getting Games
 In order to use this launcher, you will need some games, a good source to find these games is an [index](https://fpconnect.fisher-price.com/dssupdate/) on Fisher Price's website. This index has a lot more than iXL Learning System games, but usually games will have a "Mac_Software" folder and "PC_Software" folder.
 
-From here, Download the .zip in the PC_Software folder, and extract it to a folder. Then create a "Games" and place the newly downloaded game folder inside the "Games" folder.
+From here, Download the .zip in the PC_Software folder, create a folder called "Games" in the SFPlayer folder, and then add your .zip file to it.
 ## Acknowledgments
 Thanks to [Groovz](https://www.youtube.com/channel/UCqcXpzBPk5JbYmW92IHBg3A) for providing the Fisher Price file index website, as well as gathering pictures and information about the device!
